@@ -1,0 +1,38 @@
+### Файл запросов для Visual Studio / Rider: нажмите «Send request» над запросом.
+### Сценарий п. 3.2 ТЗ. После первого запроса скопируйте id игрока в переменную playerId.
+
+@host = http://localhost:5257
+@playerId = 00000000-0000-0000-0000-000000000000
+
+### 1. Регистрация игрока
+POST {{host}}/api/players
+Content-Type: application/json
+
+{ "nickname": "Alex" }
+
+### 2. Начисление опыта за урок
+POST {{host}}/api/players/{{playerId}}/xp
+Content-Type: application/json
+
+{ "amount": 150, "source": "lesson" }
+
+### 3. Профиль игрока
+GET {{host}}/api/players/{{playerId}}
+
+### 4. Прогресс до следующего уровня
+GET {{host}}/api/players/{{playerId}}/progress
+
+### 5. Достижения игрока
+GET {{host}}/api/players/{{playerId}}/achievements
+
+### 6. Каталог достижений
+GET {{host}}/api/achievements
+
+### 7. Рейтинг
+GET {{host}}/api/leaderboard?top=10
+
+### Ошибка валидации → 400
+POST {{host}}/api/players/{{playerId}}/xp
+Content-Type: application/json
+
+{ "amount": -5, "source": "" }
